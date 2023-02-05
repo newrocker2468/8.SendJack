@@ -1,0 +1,143 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <title>Login - SendJack</title>
+    <script
+      src="https://kit.fontawesome.com/3af0056356.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/signup.css" />
+  </head>
+  <body>
+    <div id="first">
+      <button
+        class="signup"
+        onclick="window.location.href = 'login'"
+      >Login</button>
+      <div class="main">
+        <div class="left animate__animated animate__fadeInDown">
+          <img src="img/logo_black.png" alt="" width="54px" />
+          <h3>Signup</h3>
+          <p>Get Started With Your Account!</p>
+
+          <button class="google">
+            <img src="img/google.png" alt="" width="20px" />
+            Sign Up With Google</button>
+
+          <form method="POST">
+            <input
+              required=""
+              type="email"
+              placeholder="Your Email"
+              id="email"
+              onkeyup="validateEmail()"
+            />
+            <button
+              type="submit"
+              class="disabledButton"
+              id="submit"
+              disabled
+            >CONTINUE</button>
+          </form>
+
+          <p style="color: red" id="errBox" class="errbox">&nbsp;{{message}}</p>
+
+        </div>
+        <div class="right animate__animated animate__zoomIn">
+
+        </div></div>
+
+    </div>
+
+    <div id="second">
+      <i class="fa-regular fa-envelope-open"></i>
+      <h2>Check Your Email</h2>
+      <p>We Have Sent a 6-Digit Verification Code </p>
+
+      <div class="prompt">
+        Enter the code generated on your mobile device below to log in!
+      </div>
+
+      <form
+        method="get"
+        class="digit-group"
+        data-group-name="digits"
+        data-autosubmit="false"
+        autocomplete="off"
+      >
+        <input
+          type="text"
+          id="digit-1"
+          name="digit-1"
+          data-next="digit-2"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          id="digit-2"
+          name="digit-2"
+          data-next="digit-3"
+          data-previous="digit-1"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          id="digit-3"
+          name="digit-3"
+          data-next="digit-4"
+          data-previous="digit-2"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          id="digit-4"
+          name="digit-4"
+          data-next="digit-5"
+          data-previous="digit-3"
+          autocomplete="off"
+        />
+
+        <input
+          type="text"
+          id="digit-5"
+          name="digit-5"
+          data-next="digit-6"
+          data-previous="digit-4"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          id="digit-6"
+          name="digit-6"
+          data-next="digit-7"
+          data-previous="digit-5"
+          autocomplete="off"
+        />
+
+      </form>
+
+      <button id="secondNext">NEXT</button>
+
+      <a href="#">Click to Send a New Code</a>
+      <p>OR go <a onclick="goToFirst()">back</a></p>
+    </div>
+  </body>
+
+  <script
+    src="https://code.jquery.com/jquery-3.6.3.js"
+    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"
+  ></script>
+  <script src="js/signup.js"></script>
+  <script
+    src="https://kit.fontawesome.com/3af0056356.js"
+    crossorigin="anonymous"
+  ></script>
+</html>
