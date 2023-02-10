@@ -1,12 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Sofia+Sans&display=swap");
 
+body {
+  background-color: aliceblue;
+}
+
 .courier_box_img {
   position: absolute;
   width: 30%;
   bottom: 0;
 }
 .main {
-  background: rgb(255, 255, 255);
+  background: aliceblue (255, 255, 255);
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -170,8 +174,7 @@
 }
 
 .errbox {
-  position: absolute;
-  top: 85%;
+    margin-top: 20px;
 }
 
 .signup {

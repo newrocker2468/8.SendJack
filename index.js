@@ -1,73 +1,73 @@
-const express = require("express");
-const path = require("path");
+/***********************************
+ * 
+ * Imports for Functionalities
+ * 
+ **********************************/
+
+import express from "express";
+import path from "path";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import handlebars from "express-handlebars";
+import bodyParser from "body-parser";
+import * as dotenv from 'dotenv'
+
+/***********************************
+ * 
+ * Object Declarations for Imports
+ *
+ **********************************/
+
 var app = express();
-const handlebars = require("express-handlebars");
-var bodyParser = require("body-parser");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename)
+dotenv.config()
+
+/***********************************
+ * 
+ * Setting Express Global Values
+ * 
+ ***********************************/
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.engine("handlebars", handlebars.engine());
 app.set("view engine", "handlebars");
 app.set("views", "./views");
-const mysql = require("./sqlConnect.js");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
-
-
 app.use(express.static(path.join(__dirname, "/public")));
 
+
+/***********************************
+ * 
+ * Main Express Code
+ * 
+ ***********************************/
+
+// *Route Declarations
+
+import loginRoute from './routes/loginRoute.js'
+import signupRoute from './routes/signupRoute.js'
+import emailController from './Controllers/emailController.js'
+import resetRoute from './routes/resetRoute.js'
+
+// *Express Routes
+
+
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index")
 });
 
 app.post("/", (req, res) => {
-  res.render("index");
-});
+  res.render("error", { message: "You Cannot Use POST Method on This Page!", code: 405 })
+  res.status(405)
+})
 
-app.get("/login", (req, res) => {
-  res.render("login");
-});
+app.use(loginRoute)
+app.use(signupRoute)
+app.use(resetRoute)
 
-app.get("/signup", (req, res) => {
-  res.render("register");
-});
+//* Controllers
 
-app.post("/mail" (req,res) => {
-  
-}) 
+app.use(emailController)
 
-app.post("/login", (req, res) => {
-  let query1 = `SELECT COUNT(*) AS rowCount FROM users WHERE email= 'anuragsawant@duck.com'`;
-  let query = `SELECT * FROM users WHERE email= 'anuragsawant@duck.com'`;
-  console.log(req.body.email);
-  mysql.query(query1, (err, rows) => {
-    if (err) throw err;
-    console.log(rows[0].rowCount);
-    if (rows[0].rowCount == 1) {
-      mysql.query(query, (err, rows) => {
-        if (err) throw err;
-        else {
-          bcrypt.compare(req.body.password, rows[0].password, (err, result) => {
-            if (err) throw err;
-            if (result) {
-              res.send({
-                message: "Encrypted Password Matches",
-                loggedIn: true,
-              });
-            } else {
-              res.send({
-                message: "Username or Password is Incorrect",
-                loggedIn: false,
-              });
-            }
-          });
-        }
-      });
-    } else {
-      res.send({
-        message: "Username or Password is Incorrect",
-        loggedIn: false,
-      });
-    }
-  });
-});
 
 app.listen(5000);
